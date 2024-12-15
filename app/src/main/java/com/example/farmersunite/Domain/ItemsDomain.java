@@ -8,6 +8,7 @@ public class ItemsDomain implements Serializable {
     private double price;
     private String description;
     private double rate;
+    private int NumberinCart;
 
     public ItemsDomain(String imgPath, String title, double price, String description, double rate) {
         this.imgPath = imgPath;
@@ -55,5 +56,12 @@ public class ItemsDomain implements Serializable {
 
     public void setRate(double rate) {
         this.rate = rate;
+    }
+
+    public int getNumberinCart() {
+        return NumberinCart;
+    }
+    public void setNumberinCart(int NumberinCart) {
+        this.NumberinCart = NumberinCart;
     }
 }

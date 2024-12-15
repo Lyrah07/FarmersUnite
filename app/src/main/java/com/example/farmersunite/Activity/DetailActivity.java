@@ -1,22 +1,22 @@
 package com.example.farmersunite.Activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.farmersunite.Adapter.SimilarAdapter;
 import com.example.farmersunite.Domain.ItemsDomain;
+import com.example.farmersunite.Helper.ManagmentCart;
 import com.example.farmersunite.R;
 
 public class DetailActivity extends AppCompatActivity {
@@ -28,16 +28,22 @@ private TextView scaleTxt,plusBtn,minusBtn,totalTxt;
 private int weight=1;
 private RecyclerView.Adapter similarAdapter;
 private RecyclerView recyclerViewSimilar;
+private int numberOrder = 1;
+private Button addTocartBtn;
+private ManagmentCart managmentCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+
         getBundles();
         initView();
         setVariable();
         initSimilarList();
+
+        managmentCart= new ManagmentCart(DetailActivity.this);
     }
 
     private void initSimilarList() {
@@ -64,6 +70,7 @@ private RecyclerView recyclerViewSimilar;
         ratingBar.setRating((float) object.getRate());
         totalTxt.setText(weight*object.getPrice()+"₱");
 
+
         plusBtn.setOnClickListener(v -> {
             weight = weight + 1;
             scaleTxt.setText(weight+" kg");
@@ -77,6 +84,18 @@ private RecyclerView recyclerViewSimilar;
                 totalTxt.setText(weight*object.getPrice()+"₱");
             }
         });
+
+        addTocartBtn.setOnClickListener(v -> {
+            object.setNumberinCart(weight);
+            managmentCart.insertItem(object);
+        });
+//        addTocartBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(DetailActivity.this, "Added to Cart", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
     }
 
     private void initView() {
@@ -95,6 +114,7 @@ private RecyclerView recyclerViewSimilar;
 
     private void getBundles() {
         object = (ItemsDomain) getIntent().getSerializableExtra("object");
+
 
     }
 }

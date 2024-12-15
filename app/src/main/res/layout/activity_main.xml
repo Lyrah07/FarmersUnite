@@ -81,7 +81,6 @@
                 android:textColor="@color/black"
                 android:textAlignment="center"
                 android:layout_marginTop="16dp"/>
-
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

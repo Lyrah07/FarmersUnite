@@ -189,7 +189,7 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/imageView8"
+                            android:id="@+id/homeBtn"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_gravity="center"
